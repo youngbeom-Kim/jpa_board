@@ -20,4 +20,5 @@ public class BoardController {
     public String upadte() {
         return "board/update";
     }
+
 }
