@@ -72,4 +72,5 @@ class BoardRepositoryTest {
         assertThat(boards2.getContent()).isEqualTo(content);
 
     }
+
 }
