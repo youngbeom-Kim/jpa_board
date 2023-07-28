@@ -20,6 +20,8 @@ public class BoardController {
         Page<BoardDto> results = customBoardRepository.selectBoardList(searchVal, pageable);
         model.addAttribute("list", results);
         model.addAttribute("maxPage", 5);
+        model.addAttribute("searchVal", searchVal);
+
         pageModelPut(results, model);
         return "board/list";
     }

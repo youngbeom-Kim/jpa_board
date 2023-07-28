@@ -28,11 +28,11 @@ class BoardRepositoryTest {
     public void 게시판_등록() {
 
         //등록된 글 다 지우기
-        boardRepository.deleteAll();
+        //boardRepository.deleteAll();
 
         //given
-        String title = "타이틀1";
-        String content = "내용1";
+        String title = "타이틀25";
+        String content = "내용";
 
         List<Member> memberList = memberRepository.findAll();
         Member member = memberList.get(0);

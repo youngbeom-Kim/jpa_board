@@ -1,10 +1,10 @@
 package jpa.board.repositoryImpl;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jpa.board.dto.BoardDto;
 import jpa.board.dto.QBoardDto;
 import jpa.board.repository.CustomBoardRepository;
-import ognl.BooleanExpression;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -52,6 +52,7 @@ public class BoardRepositoryImpl implements CustomBoardRepository {
                         ,member.username))
                 .from(board)
                 .leftJoin(board.member, member)
+                .where(containsSearch(searchVal))
                 .orderBy(board.id.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())

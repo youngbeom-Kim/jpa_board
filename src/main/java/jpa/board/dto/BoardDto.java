@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class BoardDto {
 
     private Long id;            //시퀀스
+
     @NotEmpty(message = "제목은 필수입니다.")
     private String title;              //제목
     private String content;            //내용
@@ -19,6 +20,10 @@ public class BoardDto {
     private LocalDateTime uptDate;     //수정 날짜
     private Long viewCount;            //조회수
     private String username;            //사용자 이름
+
+    public BoardDto() {
+
+    }
 
     public BoardDto(String title, String content){
         this.title = title;
