@@ -39,8 +39,15 @@ public class BoardController {
     }
 
     @GetMapping("/write")
-    public String write() {
+    public String write(Model model) {
+        model.addAttribute("form", new BoardDto());
         return "board/write";
+    }
+
+    @PostMapping("/write")
+    public String save(BoardDto boardDto) {
+        boardService.saveBoard(boardDto);
+        return "redirect:/";
     }
 
     @GetMapping("/update")

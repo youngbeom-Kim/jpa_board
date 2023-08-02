@@ -50,7 +50,7 @@ public class Board {
     }
 
     @Builder
-    public Board(String title, String content, Long viewCount, String delYn, Member member){
+    public Board(String title, String content, Member member){
         this.title = title;
         this.content = content;
         this.viewCount = 0L;
