@@ -82,7 +82,6 @@ public class BoardController {
 
     @PostMapping("/delete")
     public String delete(@RequestParam List<String> boardIds) {
-
         for(int i = 0; i < boardIds.size(); i++) {
             Long id = Long.valueOf(boardIds.get(i));
             boardService.deleteBoard(id);
