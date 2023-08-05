@@ -1,6 +1,7 @@
 package jpa.board.controller;
 
 import jpa.board.dto.BoardDto;
+import jpa.board.entity.Board;
 import jpa.board.repository.CustomBoardRepository;
 import jpa.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -9,9 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -58,9 +57,27 @@ public class BoardController {
         return "redirect:/";
     }
 
-    @GetMapping("/update")
-    public String upadte() {
+    @GetMapping("/update/{boardId}")
+    public String detail(@PathVariable Long boardId, Model model) {
+        Board board = boardService.selectBoardDetail(boardId);
+        BoardDto boardDto = new BoardDto();
+        boardDto.setId(boardId);
+        boardDto.setTitle(board.getTitle());
+        boardDto.setContent(board.getContent());
+        model.addAttribute("boardDto", boardDto);
+
         return "board/update";
+    }
+
+    @PutMapping("/update/{boardId}")
+    public String update(@Valid BoardDto boardDto, BindingResult result) {
+        //유효성검사 걸릴 시
+        if (result.hasErrors()) {
+            return "board/update";
+        }
+
+        boardService.saveBoard(boardDto);
+        return "redirect:/";
     }
 
     @PostMapping("/delete")
